@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import "./App.css";
+import './App.css';
 
 const langList: { [key: string]: { nativeName: string } } = {
-  en: { nativeName: "English" },
-  pl: { nativeName: "Polski" },
+  en: { nativeName: 'English' },
+  pl: { nativeName: 'Polski' }
 };
 
 function App() {
@@ -19,17 +19,16 @@ function App() {
           <button
             key={lng}
             style={{
-              fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+              fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal'
             }}
             type="submit"
-            onClick={() => i18n.changeLanguage(lng)}
-          >
+            onClick={() => i18n.changeLanguage(lng)}>
             {langList[lng].nativeName}
           </button>
         ))}
       </div>
 
-      <h1>{t("React")}</h1>
+      <h1>{t('React')}</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
