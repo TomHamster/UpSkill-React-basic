@@ -18,9 +18,7 @@ function App() {
         {Object.keys(langList).map((lng: string) => (
           <button
             key={lng}
-            style={{
-              fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal'
-            }}
+            style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
             type="submit"
             onClick={() => i18n.changeLanguage(lng)}>
             {langList[lng].nativeName}
