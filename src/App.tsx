@@ -1,3 +1,4 @@
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,20 +16,27 @@ function App() {
   return (
     <div className="App">
       <div>
-        {Object.keys(langList).map((lng: string) => (
-          <button
-            key={lng}
-            style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
-            type="submit"
-            onClick={() => i18n.changeLanguage(lng)}>
-            {langList[lng].nativeName}
-          </button>
-        ))}
+        <ToggleButtonGroup
+          color="primary"
+          value={i18n.resolvedLanguage}
+          exclusive
+          onChange={(event, value) => i18n.changeLanguage(value)}
+          aria-label="Platform">
+          {Object.keys(langList).map((lng: string) => (
+            <ToggleButton
+              value={lng}
+              style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}>
+              {langList[lng].nativeName}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
       </div>
 
       <h1>{t('React')}</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
