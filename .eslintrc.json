@@ -20,8 +20,10 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "unused-imports"],
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "unused-imports/no-unused-imports": "error",
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off"
   }
 }

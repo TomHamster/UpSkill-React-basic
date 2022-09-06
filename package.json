@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "postinstall": "husky install",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
+    "lint:fix": "eslint . --fix",
+    "format": "eslint . --fix && prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.3",
     "husky": "^8.0.1",
     "i18next": "^21.9.1",
     "i18next-browser-languagedetector": "^6.1.5",
@@ -32,6 +35,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
