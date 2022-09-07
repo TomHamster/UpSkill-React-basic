@@ -5,6 +5,7 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import './App.css';
 import i18nInitObject from './i18n/i18n';
 import PageTemplate from './templates/page-template';
+import PageTemplateClass from './templates/page-template-class';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +22,15 @@ function App() {
             </Button>
           </div>
         </PageTemplate>
+
+        <PageTemplateClass>
+          <h1>{t('React')}</h1> temaplate class
+          <div className="card">
+            <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
+              count is {count}
+            </Button>
+          </div>
+        </PageTemplateClass>
       </div>
     </I18nextProvider>
   );

@@ -7,7 +7,7 @@ import { PageTemplateProps } from './page-template.interface';
 const PageTemplate: FC<PageTemplateProps> = ({ children }) => {
   return (
     <Box>
-      <NavBar></NavBar>
+      <NavBar />
       <Container>{children}</Container>
     </Box>
   );
