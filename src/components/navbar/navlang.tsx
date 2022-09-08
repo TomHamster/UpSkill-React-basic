@@ -12,9 +12,8 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
+import i18n from 'i18n/i18n';
 import React, { useState } from 'react';
-
-import i18n from '../../i18n/i18n';
 
 export default function NavLang() {
   const langList: { [key: string]: { nativeName: string } } = {
@@ -40,7 +39,7 @@ export default function NavLang() {
   };
 
   return (
-    <span>
+    <>
       <Tooltip title="Change Language">
         <IconButton
           onClick={handleOpenLangMenu}
@@ -103,6 +102,6 @@ export default function NavLang() {
           ))}
         </List>
       </Collapse>
-    </span>
+    </>
   );
 }

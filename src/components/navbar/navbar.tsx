@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 import NavLang from './navlang';
 
-interface Props {
+interface NavbarProps {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -25,13 +25,12 @@ interface Props {
   window?: () => Window;
 }
 
-export default function NavBar(props: Props) {
+export default function NavBar({ window }: NavbarProps) {
   const { t } = useTranslation();
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const drawerWidth = 240;
-  const navItems = ['Invoices', 'Add new invoices'];
+  const navItems = ['Invoices', 'Add new invoice'];
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -71,7 +70,7 @@ export default function NavBar(props: Props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} disableElevation>
                 {t(item)}
               </Button>
             ))}
