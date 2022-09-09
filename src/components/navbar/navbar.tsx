@@ -31,7 +31,7 @@ export default function NavBar(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const drawerWidth = 240;
-  const navItems = ['Invoices', 'Add new invoices'];
+  const navItems = ['Invoices', 'Add new invoice'];
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
