@@ -39,7 +39,7 @@ export default function NavLang() {
   };
 
   return (
-    <span>
+    <>
       <Tooltip title="Change Language">
         <IconButton
           onClick={handleOpenLangMenu}
@@ -102,6 +102,6 @@ export default function NavLang() {
           ))}
         </List>
       </Collapse>
-    </span>
+    </>
   );
 }
