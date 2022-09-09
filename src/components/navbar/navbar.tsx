@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 import NavLang from './navlang';
 
-interface Props {
+interface NavBarProps {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -25,7 +25,7 @@ interface Props {
   window?: () => Window;
 }
 
-export default function NavBar(props: Props) {
+export default function NavBar(props: NavBarProps) {
   const { t } = useTranslation();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
