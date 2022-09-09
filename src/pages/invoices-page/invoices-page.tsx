@@ -1,5 +1,5 @@
 import { Delete, Edit } from '@mui/icons-material';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 
 import StickyTable from '../../components/sticky-table/sticky-table';
@@ -7,6 +7,7 @@ import {
   StickyTableActions,
   StickyTableColumn
 } from '../../components/sticky-table/sticky-table.interfaces';
+import { DATA_BASE_URL } from '../../shared/global.constants';
 import PageTemplate from '../../templates/page-template';
 import { Invoices, InvoicesColumnIds } from './invoices-page.interface';
 
@@ -36,6 +37,7 @@ const columns: StickyTableColumn[] = [
 ];
 
 export default function InvoicesPage() {
+  console.log(import.meta.env.VITE_DATA_BASE_URL);
   const [invoices, setInvoices] = useState<Invoices[] | null>(null);
   useEffect(() => {
     getInvoices().then();
@@ -47,17 +49,17 @@ export default function InvoicesPage() {
 
   const getInvoices = () => {
     return axios
-      .get('http://localhost:3000/invoices')
+      .get(`${DATA_BASE_URL}/invoices`)
       .then((response: AxiosResponse<Invoices[]>) => {
         setInvoices(response.data);
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         console.log(error);
       });
   };
 
   const removeInvoices = (id: string) => {
-    return axios.delete(`http://localhost:3000/invoices/${id}`).catch((error) => {
+    return axios.delete(`${DATA_BASE_URL}/invoices/${id}`).catch((error: AxiosError) => {
       console.log(error);
     });
   };

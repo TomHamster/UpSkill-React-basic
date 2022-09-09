@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
+    "start": "npm-run-all --parallel \"moc\" \"dev\" ",
+    "moc": "json-server db.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -41,6 +43,7 @@
     "eslint-plugin-react": "^7.31.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"

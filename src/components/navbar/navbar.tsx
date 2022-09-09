@@ -70,7 +70,7 @@ export default function NavBar({ window }: NavbarProps) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} disableElevation>
+              <Button key={item} sx={{ color: '#fff' }}>
                 {t(item)}
               </Button>
             ))}

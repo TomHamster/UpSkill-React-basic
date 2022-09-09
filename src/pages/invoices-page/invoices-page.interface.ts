@@ -7,7 +7,7 @@ export interface Invoices {
 }
 
 export enum InvoicesColumnIds {
-  no = 'InvoicesColumnIds',
+  no = 'no',
   created = 'created',
   validUtil = 'validUtil',
   amount = 'amount'
