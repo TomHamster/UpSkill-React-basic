@@ -1,13 +1,14 @@
 import { Delete, Edit } from '@mui/icons-material';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import StickyTable from '../../components/sticky-table/sticky-table';
 import {
   StickyTableActions,
   StickyTableColumn
 } from '../../components/sticky-table/sticky-table.interfaces';
-import { DATA_BASE_URL } from '../../shared/global.constants';
+import { DATA_BASE_URL } from '../../shared/global.const';
 import PageTemplate from '../../templates/page-template';
 import { Invoices, InvoicesColumnIds } from './invoices-page.interface';
 
@@ -32,12 +33,13 @@ const columns: StickyTableColumn[] = [
     label: 'Amount',
     minWidth: 170,
     align: 'right',
-    format: (value: string | number) => value.toLocaleString('en-US')
+    format: (value: string | number) => value.toLocaleString()
   }
 ];
 
 export default function InvoicesPage() {
-  console.log(import.meta.env.VITE_DATA_BASE_URL);
+  const navigate = useNavigate();
+
   const [invoices, setInvoices] = useState<Invoices[] | null>(null);
   useEffect(() => {
     getInvoices().then();
@@ -70,9 +72,7 @@ export default function InvoicesPage() {
     });
   };
 
-  const editHandler = (id: string) => {
-    console.log(id + 'edit');
-  };
+  const editHandler = (id: string) => navigate(`/invoices/${id}`);
 
   const actions: StickyTableActions[] = [
     {
@@ -84,7 +84,7 @@ export default function InvoicesPage() {
     {
       icon: Edit,
       color: 'primary',
-      ariaLabel: 'remove invoice',
+      ariaLabel: 'edit invoice',
       onClick: editHandler
     }
   ];
