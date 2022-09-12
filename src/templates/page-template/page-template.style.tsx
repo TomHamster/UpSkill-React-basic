@@ -4,5 +4,5 @@ import { styled } from '@mui/system';
 import { PageNavHeight } from './page-template.constants';
 
 export const PageContainer = styled(Container)(() => ({
-  margin: `${PageNavHeight}px auto`
+  margin: `${PageNavHeight} auto`
 }));

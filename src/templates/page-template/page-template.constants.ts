@@ -1,1 +1,1 @@
-export const PageNavHeight = 64;
+export const PageNavHeight = '94px';

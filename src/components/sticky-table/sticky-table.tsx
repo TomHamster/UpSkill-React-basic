@@ -1,5 +1,4 @@
 import { Box, IconButton } from '@mui/material';
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,13 +8,16 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { PageNavHeight } from '../../templates/page-template/page-template.constants';
+import { RowsPerPageOptions } from './sticky-table.const';
 import { StickyTableProps } from './sticky-table.interfaces';
 
-const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
+const StickyTable = ({ columns, rows, actions, tableMaxHeight }: StickyTableProps) => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(RowsPerPageOptions[0]);
+  tableMaxHeight = tableMaxHeight ? tableMaxHeight : '100vh';
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -27,9 +29,9 @@ const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: `calc(100vh - ${PageNavHeight + 150}px)` }}>
-        <Table stickyHeader aria-label="sticky table">
+    <>
+      <TableContainer sx={{ maxHeight: tableMaxHeight }}>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               {columns?.map((column) => (
@@ -37,12 +39,12 @@ const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}>
-                  {column.label}
+                  {t(column.label)}
                 </TableCell>
               ))}
               {actions.length && (
                 <TableCell key="actions" align="right">
-                  {'Actions'}
+                  {t('Actions')}
                 </TableCell>
               )}
             </TableRow>
@@ -68,7 +70,7 @@ const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
                             <IconButton
                               key={`action_${index}`}
                               color={action.color}
-                              aria-label={action.ariaLabel}
+                              aria-label={t(action.ariaLabel)}
                               component="label"
                               onClick={() => action.onClick(row.id)}>
                               <action.icon />
@@ -85,7 +87,7 @@ const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={RowsPerPageOptions}
         component="div"
         count={rows?.length || 0}
         rowsPerPage={rowsPerPage}
@@ -93,7 +95,7 @@ const StickyTable = ({ columns, rows, actions }: StickyTableProps) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </>
   );
 };
 

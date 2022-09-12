@@ -1,5 +1,12 @@
 {
   "React": "Aplikacja reactowa",
   "Invoices": "Faktury",
-  "Add new invoice": "Dodaj fakturę"
+  "Add new invoice": "Dodaj fakturę",
+  "Remove invoice": "Usuń fakturę",
+  "Edit invoice": "Edytuj fakturę",
+  "No.": "Nr.",
+  "Created": "Utworzono",
+  "Valid until": "Ważna do",
+  "Amount": "Wartość",
+  "Actions": "Akcje"
 }
