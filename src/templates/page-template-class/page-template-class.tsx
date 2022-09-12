@@ -1,7 +1,7 @@
+import NavBar from '@/components/navbar';
 import { Box, Container } from '@mui/material';
 import React, { Component } from 'react';
 
-import NavBar from '../../components/navbar';
 import { PageTemplateProps } from '../page-template/page-template.interface';
 
 class PageTemplateClass extends Component<PageTemplateProps> {
