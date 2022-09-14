@@ -8,6 +8,7 @@ import { PageNavHeight } from '@/templates/page-template/page-template.constants
 import { Delete, Edit } from '@mui/icons-material';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { INVOICES_ENDPOINTS } from './invoices-page.const';
 import { Invoice, InvoicesColumnIds } from './invoices-page.interface';
@@ -38,10 +39,8 @@ const columns: StickyTableColumnProps[] = [
 ];
 
 export default function InvoicesPage() {
+  const navigate = useNavigate();
   const [invoices, setInvoices] = useState<Invoice[] | null>(null);
-  useEffect(() => {
-    getInvoices().then();
-  }, []);
 
   const invoicesList: Invoice[] | null = useMemo<Invoice[] | null>(() => {
     return invoices;
@@ -70,9 +69,7 @@ export default function InvoicesPage() {
     });
   };
 
-  const editHandler = (id: string) => {
-    console.log(id + 'edit');
-  };
+  const editHandler = (id: string) => navigate(`/invoices/${id}`);
 
   const actions: StickyTableActionsProps[] = [
     {
@@ -88,6 +85,10 @@ export default function InvoicesPage() {
       onClick: editHandler
     }
   ];
+
+  useEffect(() => {
+    getInvoices().then();
+  }, []);
 
   return (
     <PageTemplate>
