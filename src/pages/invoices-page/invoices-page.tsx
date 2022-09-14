@@ -50,6 +50,7 @@ export default function InvoicesPage() {
     return axios
       .get(INVOICES_ENDPOINTS.ALL())
       .then((response: AxiosResponse<Invoice[]>) => {
+        console.log(response, 'response');
         setInvoices(response.data);
       })
       .catch((error: AxiosError) => {
