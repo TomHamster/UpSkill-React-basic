@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import NavLang from './navlang';
 
@@ -30,7 +31,16 @@ export default function NavBar({ window }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const drawerWidth = 240;
-  const navItems = ['Invoices', 'Add new invoice'];
+  const navItems = [
+    {
+      title: 'Invoices',
+      to: '/'
+    },
+    {
+      title: 'Add new invoice',
+      to: '/invoices/new'
+    }
+  ];
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -41,9 +51,9 @@ export default function NavBar({ window }: NavbarProps) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={t(item)} />
+          <ListItem key={item.title} disablePadding>
+            <ListItemButton component={Link} to={item.to} sx={{ textAlign: 'center' }}>
+              <ListItemText primary={t(item.title)} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,8 +80,8 @@ export default function NavBar({ window }: NavbarProps) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} disableElevation>
-                {t(item)}
+              <Button key={item.title} component={Link} to={item.to} sx={{ color: '#fff' }}>
+                {t(item.title)}
               </Button>
             ))}
             <NavLang />
