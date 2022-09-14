@@ -1,4 +1,4 @@
-export interface Invoices {
+export interface Invoice {
   id: InvoicesColumnIds;
   no: string;
   created: string;
@@ -9,6 +9,6 @@ export interface Invoices {
 export enum InvoicesColumnIds {
   no = 'no',
   created = 'created',
-  validUtil = 'validUtil',
+  validUntil = 'validUtil',
   amount = 'amount'
 }

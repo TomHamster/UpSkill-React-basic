@@ -1,3 +1,4 @@
+import i18n from '@/i18n/i18n';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import {
@@ -14,10 +15,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import i18n from '../../i18n/i18n';
-
 export default function NavLang() {
-  const langList: { [key: string]: { nativeName: string } } = {
+  const langList: Record<string, { nativeName: string }> = {
     en: { nativeName: 'English' },
     pl: { nativeName: 'Polski' }
   };
