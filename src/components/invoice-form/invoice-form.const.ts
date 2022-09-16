@@ -1,5 +1,4 @@
 import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
-import { faker } from '@faker-js/faker';
 import * as Yup from 'yup';
 
 export const phoneRegExp =
@@ -67,7 +66,7 @@ export const defaultValueForm: InvoiceFormData = {
   sender: { ...defaultValueCompany },
   created: new Date().toISOString().slice(0, 10),
   validUntil: (() => {
-    let now = new Date();
+    const now = new Date();
     return new Date(now.setDate(now.getDate() + 30)).toISOString().slice(0, 10);
   })()
 };

@@ -1,7 +1,6 @@
 import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
 import InvoiceForm from '@/components/invoice-form/invoice-form';
 import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
-import { Invoice } from '@/pages/invoices-page/invoices-page.interface';
 import PageTemplate from '@/templates/page-template';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
@@ -58,7 +57,7 @@ export default function InvoiceEditPage() {
 
   return (
     <PageTemplate>
-      <div>{invoice && <InvoiceForm formData={invoice} onSave={save}></InvoiceForm>}</div>
+      {invoice && <InvoiceForm formData={invoice} onSave={save}></InvoiceForm>}
     </PageTemplate>
   );
 }

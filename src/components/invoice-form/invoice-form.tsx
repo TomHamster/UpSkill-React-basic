@@ -8,10 +8,8 @@ import {
   defaultValueItem,
   validationSchema
 } from '@/components/invoice-form/invoice-form.const';
-import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Grid, TextField } from '@mui/material';
-import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';

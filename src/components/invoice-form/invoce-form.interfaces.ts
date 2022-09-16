@@ -1,5 +1,4 @@
 import { Invoice } from '@/pages/invoices-page/invoices-page.interface';
-import { faker } from '@faker-js/faker';
 
 export interface CompanyData {
   companyName: string;
