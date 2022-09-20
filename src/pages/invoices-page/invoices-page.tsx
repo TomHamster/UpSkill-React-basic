@@ -3,11 +3,12 @@ import {
   StickyTableActionsProps,
   StickyTableColumnProps
 } from '@/components/sticky-table/sticky-table.interfaces';
+import { useFetch } from '@/hooks/useFetch';
 import PageTemplate from '@/templates/page-template';
 import { PageNavHeight } from '@/templates/page-template/page-template.constants';
 import { Delete, Edit } from '@mui/icons-material';
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useEffect, useMemo, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { INVOICES_ENDPOINTS } from './invoices-page.const';
@@ -39,23 +40,13 @@ const columns: StickyTableColumnProps[] = [
 ];
 
 export default function InvoicesPage() {
+  const [deleteID, setDeleteID] = useState('');
   const navigate = useNavigate();
-  const [invoices, setInvoices] = useState<Invoice[] | null>(null);
+  const { data, loading, error } = useFetch(INVOICES_ENDPOINTS.ALL(), deleteID);
 
   const invoicesList: Invoice[] | null = useMemo<Invoice[] | null>(() => {
-    return invoices;
-  }, [invoices]);
-
-  const getInvoices = () => {
-    return axios
-      .get(INVOICES_ENDPOINTS.ALL())
-      .then((response: AxiosResponse<Invoice[]>) => {
-        setInvoices(response.data);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
-  };
+    return data;
+  }, [data]);
 
   const removeInvoices = (id: string) => {
     return axios.delete(INVOICES_ENDPOINTS.EDIT(id)).catch((error: AxiosError) => {
@@ -65,7 +56,7 @@ export default function InvoicesPage() {
 
   const removeHandler = (id: string) => {
     removeInvoices(id).then(() => {
-      getInvoices().then();
+      setDeleteID(id);
     });
   };
 
@@ -86,12 +77,8 @@ export default function InvoicesPage() {
     }
   ];
 
-  useEffect(() => {
-    getInvoices().then();
-  }, []);
-
   return (
-    <PageTemplate>
+    <PageTemplate loading={loading} error={error}>
       <StickyTable
         columns={columns}
         rows={invoicesList}

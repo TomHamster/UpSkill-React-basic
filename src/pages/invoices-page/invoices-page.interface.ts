@@ -1,9 +1,9 @@
 export interface Invoice {
   id: InvoicesColumnIds;
-  no: string | null;
-  created: string | null;
-  amount: number | null;
-  validUntil: string | null;
+  no: string;
+  created: string;
+  amount: number;
+  validUntil: string;
 }
 
 export enum InvoicesColumnIds {

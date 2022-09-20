@@ -3,9 +3,11 @@ import InvoiceForm from '@/components/invoice-form/invoice-form';
 import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
 import PageTemplate from '@/templates/page-template';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function InvoiceNewPage() {
+  const [error, setError] = useState<string>();
   const navigate = useNavigate();
   const addInvoice = (data: InvoiceFormData) => {
     axios
@@ -14,7 +16,7 @@ export default function InvoiceNewPage() {
         navigate(-1);
       })
       .catch((error: AxiosError) => {
-        alert('Something went wrong, try again');
+        setError(error.message);
       });
   };
 
@@ -22,7 +24,7 @@ export default function InvoiceNewPage() {
     addInvoice(data);
   };
   return (
-    <PageTemplate>
+    <PageTemplate error={error}>
       <InvoiceForm onSave={save} />
     </PageTemplate>
   );
