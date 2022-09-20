@@ -1,10 +1,11 @@
-import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
-import InvoiceForm from '@/components/invoice-form/invoice-form';
-import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
-import PageTemplate from '@/templates/page-template';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { INVOICES_ENDPOINTS } from 'pages/invoices-page/invoices-page.const';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PageTemplate from 'templates/page-template';
+
+import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
+import InvoiceForm from 'components/invoice-form/invoice-form';
 
 export default function InvoiceEditPage() {
   const [invoice, setInvoice] = useState<InvoiceFormData>();

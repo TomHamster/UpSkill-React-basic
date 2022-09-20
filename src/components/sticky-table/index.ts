@@ -1,3 +1,3 @@
-import StickyTable from '@/components/sticky-table/sticky-table';
+import StickyTable from 'components/sticky-table/sticky-table';
 
 export default StickyTable;
