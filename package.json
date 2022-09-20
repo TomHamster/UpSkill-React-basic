@@ -33,16 +33,12 @@
     "@faker-js/faker": "^7.5.0",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/json-server": "^0.14.4",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.1",
-    "eslint-plugin-unused-imports": "^2.0.0",
+    "@typescript-eslint/parser": "^5.38.0",
     "husky": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
-    "react-hook-form": "^7.35.0"
+    "react-hook-form": "^7.35.0",
+    "typescript": "^4.8.3"
   },
   "scripts": {
     "start": "set PORT=3006 && react-scripts start",
@@ -50,9 +46,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
+    "format": "eslint . --fix && prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
   "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "ignorePatterns": ["*.js"],
     "extends": [
       "react-app",
       "react-app/jest"
