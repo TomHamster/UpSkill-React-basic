@@ -6,8 +6,8 @@ export const useFetch = (url?: string, update = '') => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   useEffect(() => {
-    if(!url) {
-      return
+    if (!url) {
+      return;
     }
 
     axios
@@ -22,5 +22,5 @@ export const useFetch = (url?: string, update = '') => {
       });
   }, [update]);
 
-  return {data, loading, error};
+  return { data, loading, error };
 };
