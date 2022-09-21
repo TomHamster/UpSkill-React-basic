@@ -51,7 +51,9 @@
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
-    "ignorePatterns": ["*.js"],
+    "ignorePatterns": [
+      "*.js"
+    ],
     "extends": [
       "react-app",
       "react-app/jest"
