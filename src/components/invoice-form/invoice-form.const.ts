@@ -1,5 +1,4 @@
 import { t } from 'i18next';
-import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
 import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
