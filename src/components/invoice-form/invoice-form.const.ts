@@ -1,13 +1,11 @@
 import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 import * as Yup from 'yup';
 
 export const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export const validationSchemaCompany = () => {
-  const { t } = useTranslation();
-
   return Yup.object().shape({
     companyName: Yup.string().required(t('isRequired', { name: 'Company name' })),
     street: Yup.string().required(t('isRequired', { name: 'Street name' })),
@@ -21,7 +19,6 @@ export const validationSchemaCompany = () => {
 };
 
 export const validationSchemaItem = () => {
-  const { t } = useTranslation();
   return Yup.object().shape({
     amount: Yup.number()
       .moreThan(0, 'Amount should be higher than 0')
@@ -36,7 +33,6 @@ export const validationSchemaItem = () => {
 };
 
 export const validationSchema = () => {
-  const { t } = useTranslation();
   return Yup.object().shape({
     no: Yup.string().required(t('isRequired', { name: 'No.' })),
     sender: validationSchemaCompany(),
