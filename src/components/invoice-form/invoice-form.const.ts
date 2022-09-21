@@ -1,44 +1,59 @@
 import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
 export const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-export const validationSchemaCompany = Yup.object().shape({
-  companyName: Yup.string().required('Company name is required'),
-  street: Yup.string().required('Street name is required'),
-  city: Yup.string().required('City name is required'),
-  postcode: Yup.string().required('Post code is required'),
-  nip: Yup.string().required('Nip code is required'),
-  tel: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
-  email: Yup.string().email('Email is Invalid'),
-  bankAccount: Yup.string()
-});
+export const validationSchemaCompany = () => {
+  const { t } = useTranslation();
 
-export const validationSchemaItem = Yup.object().shape({
-  amount: Yup.number().moreThan(0, 'Amount should be higher than 0').required('Amount is required'),
-  unit: Yup.string().required('Unt is required'),
-  tax: Yup.number().required('Tax is required'),
-  price: Yup.number().moreThan(0, 'Price should be higher than 0').required('Price is required'),
-  name: Yup.string().required('Name is required')
-});
+  return Yup.object().shape({
+    companyName: Yup.string().required(t('isRequired', { name: 'Company name' })),
+    street: Yup.string().required(t('isRequired', { name: 'Street name' })),
+    city: Yup.string().required(t('isRequired', { name: 'City name' })),
+    postcode: Yup.string().required(t('isRequired', { name: 'Post code' })),
+    nip: Yup.string().required(t('isRequired', { name: 'Nip code' })),
+    tel: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+    email: Yup.string().email('Email is Invalid'),
+    bankAccount: Yup.string()
+  });
+};
 
-export const validationSchema = Yup.object().shape({
-  no: Yup.string().required('No is required'),
-  sender: validationSchemaCompany,
-  recipient: validationSchemaCompany,
-  items: Yup.array().of(validationSchemaItem),
-  created: Yup.date().typeError('Invalid date'),
-  validUntil: Yup.date().when('created', (created, validationSchema) => {
-    return (
-      created &&
-      validationSchema.min(
-        created,
-        `Date must be later than ${new Date(created).toLocaleDateString()}`
-      )
-    );
-  })
-});
+export const validationSchemaItem = () => {
+  const { t } = useTranslation();
+  return Yup.object().shape({
+    amount: Yup.number()
+      .moreThan(0, 'Amount should be higher than 0')
+      .required(t('isRequired', { name: 'Amount' })),
+    unit: Yup.string().required(t('isRequired', { name: 'Unt' })),
+    tax: Yup.number().required(t('isRequired', { name: 'Tax' })),
+    price: Yup.number()
+      .moreThan(0, 'Price should be higher than 0')
+      .required(t('isRequired', { name: 'Price' })),
+    name: Yup.string().required(t('isRequired', { name: 'Name' }))
+  });
+};
+
+export const validationSchema = () => {
+  const { t } = useTranslation();
+  return Yup.object().shape({
+    no: Yup.string().required(t('isRequired', { name: 'No.' })),
+    sender: validationSchemaCompany(),
+    recipient: validationSchemaCompany(),
+    items: Yup.array().of(validationSchemaItem()),
+    created: Yup.date().typeError('Invalid date'),
+    validUntil: Yup.date().when('created', (created, validationSchema) => {
+      return (
+        created &&
+        validationSchema.min(
+          created,
+          `Date must be later than ${new Date(created).toLocaleDateString()}`
+        )
+      );
+    })
+  });
+};
 
 export const defaultValueItem = {
   name: '',
