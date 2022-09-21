@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
-export const useFetch = (url: string, update = '') => {
+export const useFetch = (url?: string, update = '') => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -10,7 +10,7 @@ export const useFetch = (url: string, update = '') => {
     setData(null);
     setError('');
 
-    axios
+    url && axios
       .get(url)
       .then((response: AxiosResponse) => {
         setLoading(false);

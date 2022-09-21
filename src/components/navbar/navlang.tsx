@@ -1,4 +1,3 @@
-import i18n from '@/i18n/i18n';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import {
@@ -13,6 +12,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
+import i18n from 'i18n/i18n';
 import React, { useState } from 'react';
 
 export default function NavLang() {

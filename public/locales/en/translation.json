@@ -11,5 +11,7 @@
   "Actions": "Actions",
   "Page not found": "Page not found",
   "Back to previous page": "Back to previous page",
-  "Save": "Save"
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "isRequired": "{{name}} is required"
 }

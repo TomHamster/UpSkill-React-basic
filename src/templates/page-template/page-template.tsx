@@ -1,6 +1,7 @@
-import NavBar from '@/components/navbar';
 import { Alert, Backdrop, Box, CircularProgress, Snackbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+
+import NavBar from 'components/navbar';
 
 import { PageTemplateProps } from './page-template.interface';
 import { PageContainer } from './page-template.style';
