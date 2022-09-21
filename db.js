@@ -21,10 +21,7 @@ function createRandomInvoices() {
   const data = { invoices: [] };
 
   const sum = (items) => {
-   return items.reduce(
-      (sum, item) => sum + Number(item.price),
-      0
-    );
+    return items.reduce((sum, item) => sum + Number(item.price), 0);
   };
 
   for (let i = 0; i < 100; i++) {
