@@ -6,11 +6,11 @@ export const useFetch = (url?: string, update = '') => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   useEffect(() => {
-    setLoading(true);
-    setData(null);
-    setError('');
+    if(!url) {
+      return
+    }
 
-    url && axios
+    axios
       .get(url)
       .then((response: AxiosResponse) => {
         setLoading(false);
@@ -22,5 +22,5 @@ export const useFetch = (url?: string, update = '') => {
       });
   }, [update]);
 
-  return { data, loading, error };
+  return {data, loading, error};
 };
