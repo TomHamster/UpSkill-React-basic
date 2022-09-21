@@ -21,12 +21,7 @@ function createRandomInvoices() {
   const data = { invoices: [] };
 
   const sum = (items) => {
-    let sum = 0;
-    items.map((item) => {
-      sum = sum + Number(item.price);
-    });
-
-    return sum;
+    return items.reduce((sum, item) => sum + Number(item.price), 0);
   };
 
   for (let i = 0; i < 100; i++) {
@@ -43,7 +38,7 @@ function createRandomInvoices() {
         city: faker.address.city(),
         postcode: faker.address.zipCode(),
         nip: faker.datatype.number(),
-        tel: faker.phone.number(),
+        tel: faker.phone.number('#########'),
         email: '',
         bankAccount: faker.finance.account(),
         street: faker.address.street()
@@ -53,7 +48,7 @@ function createRandomInvoices() {
         city: faker.address.city(),
         postcode: faker.address.zipCode(),
         nip: faker.datatype.number(),
-        tel: faker.phone.number(),
+        tel: faker.phone.number('#########'),
         email: '',
         bankAccount: faker.finance.account(),
         street: faker.address.street()
