@@ -2,13 +2,13 @@ export interface Invoice {
   id: InvoicesColumnIds;
   no: string;
   created: string;
-  amount: string;
-  validUtil: string;
+  amount: number;
+  validUntil: string;
 }
 
 export enum InvoicesColumnIds {
   no = 'no',
   created = 'created',
-  validUntil = 'validUtil',
+  validUntil = 'validUntil',
   amount = 'amount'
 }

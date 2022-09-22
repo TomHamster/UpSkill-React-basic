@@ -1,39 +1,46 @@
-import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
-import { Invoice } from '@/pages/invoices-page/invoices-page.interface';
-import PageTemplate from '@/templates/page-template';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useFetch } from 'hooks/useFetch';
+import { INVOICES_ENDPOINTS } from 'pages/invoices-page/invoices-page.const';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PageTemplate from 'templates/page-template';
+
+import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
+import InvoiceForm from 'components/invoice-form/invoice-form';
 
 export default function InvoiceEditPage() {
-  const [invoice, setInvoice] = useState<Invoice>();
-
-  const { id } = useParams();
+  const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { data, loading, error } = useFetch(INVOICES_ENDPOINTS.GER_INVOICE(id));
+  const invoice = data;
 
-  const getInvoice = (id: string) => {
-    return axios
-      .get(INVOICES_ENDPOINTS.GER_INVOICE(id))
-      .then((response: AxiosResponse<Invoice>) => {
-        setInvoice(response.data);
-      })
-      .catch((error: AxiosError) => {
-        redirect();
-      });
-  };
-
-  const redirect = () => {
+  if (error || !id) {
     navigate('page-not-found');
-  };
+  }
 
-  useEffect(() => {
-    if (!id) {
-      redirect();
+  const updateInvoice = (data: InvoiceFormData) => {
+    if (!data.id) {
       return;
     }
 
-    getInvoice(id).then();
-  }, []);
+    axios
+      .put(INVOICES_ENDPOINTS.EDIT(data.id), data)
+      .then((response: AxiosResponse<InvoiceFormData>) => {
+        navigate(-1);
+      })
+      .catch((error: AxiosError) => {
+        setErrorMessage(error.message);
+      });
+  };
 
-  return <PageTemplate>{JSON.stringify(invoice)}</PageTemplate>;
+  const save = (data: InvoiceFormData) => {
+    updateInvoice(data);
+  };
+
+  return (
+    <PageTemplate loading={loading} error={errorMessage}>
+      {invoice && <InvoiceForm formData={invoice} onSave={save}></InvoiceForm>}
+    </PageTemplate>
+  );
 }
