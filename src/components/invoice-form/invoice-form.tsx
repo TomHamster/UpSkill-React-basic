@@ -96,8 +96,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
             </StyledButton>
             <StyledButtonModule
               onClick={(e) => {
-                console.log(e);
-                navigate(-1);
+                navigate('/');
               }}>
               {t('Cancel')}
             </StyledButtonModule>
