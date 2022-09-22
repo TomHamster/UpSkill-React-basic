@@ -17,6 +17,7 @@ import {
 } from 'components/invoice-form/invoice-form.const';
 
 import './invoice-forrm.css';
+import { StyledButton } from 'components/styled-button/styled-button';
 
 export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
   const navigate = useNavigate();
@@ -89,9 +90,10 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button type="submit" variant="contained">
+            <StyledButton primary type="submit">
               {t('Save')}
-            </Button>
+            </StyledButton>
+
             <Button
               className="button-cancel"
               variant="contained"
