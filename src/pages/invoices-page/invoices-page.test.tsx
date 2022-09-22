@@ -1,12 +1,10 @@
-import { render } from 'test-utils';
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
+import { render } from 'test-utils';
 
 import InvoicesPage from './invoices-page';
 
-const mockedRouter = jest.mock('react-router-dom');
-
-const dummyTodos = [
+const invoicesListMock = [
   {
     id: 'd8a5a077-64b1-4fbd-9771-9cbd5638b46e',
     no: 'ggfxv',
@@ -24,9 +22,8 @@ const dummyTodos = [
 ];
 
 jest.mock('hooks/useFetch', () => ({
-    useFetch: ()=> ({ data: dummyTodos, loading: false, error:'' })
-  })
-);
+  useFetch: () => ({ data: invoicesListMock, loading: false, error: '' })
+}));
 
 describe('InvoicesPage', () => {
   test('should show table', async () => {
@@ -37,13 +34,11 @@ describe('InvoicesPage', () => {
     expect(tableElement).toBeVisible();
   });
 
-
   test('click on the navigation should redirect', async () => {
     render(<InvoicesPage />);
 
     const button = await screen.getAllByText('Add new invoice')[0];
-    fireEvent.click(button)
+    fireEvent.click(button);
     expect(screen.getByText(/Invoice Form/i)).toBeInTheDocument();
-
   });
 });
