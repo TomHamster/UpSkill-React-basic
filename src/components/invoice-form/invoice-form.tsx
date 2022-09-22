@@ -16,23 +16,23 @@ import {
   validationSchema
 } from 'components/invoice-form/invoice-form.const';
 import { StyledButton } from 'components/styled-button/styled-button';
-
-import './invoice-forrm.css';
 import { StyledButtonModule } from 'components/styled-button/styled-button-module';
 
-export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
+import './invoice-forrm.css';
+
+export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
   const navigate = useNavigate();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const formOptions = {
     resolver: yupResolver(validationSchema()),
-    defaultValues: {...defaultValueForm, ...formData}
+    defaultValues: { ...defaultValueForm, ...formData }
   };
 
-  const {control, handleSubmit, formState, getValues, watch} =
+  const { control, handleSubmit, formState, getValues, watch } =
     useForm<InvoiceFormData>(formOptions);
 
-  const {errors} = formState;
-  const {fields, append, remove} = useFieldArray({name: 'items', control});
+  const { errors } = formState;
+  const { fields, append, remove } = useFieldArray({ name: 'items', control });
 
   const numberOfItems = watch('items').length;
 
@@ -44,7 +44,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
   const calculateAmount = () => {
     const items: InvoiceItem[] = getValues('items');
     let sum = 0;
-    items.forEach(({price}) => {
+    items.forEach(({ price }) => {
       sum = sum + Number(price);
     });
 
@@ -58,12 +58,12 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
   useEffect(() => {
     const newVal = numberOfItems || 1;
     const oldVal = fields.length;
-    if(newVal > oldVal) {
-      for(let i = oldVal; i < newVal; i++){
-        append({...defaultValueItem});
+    if (newVal > oldVal) {
+      for (let i = oldVal; i < newVal; i++) {
+        append({ ...defaultValueItem });
       }
     } else {
-      for(let i = oldVal; i > newVal; i--){
+      for (let i = oldVal; i > newVal; i--) {
         remove(i - 1);
       }
     }
@@ -78,7 +78,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="no"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -94,10 +94,11 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <StyledButton primary type="submit">
               {t('Save')}
             </StyledButton>
-            <StyledButtonModule onClick={(e) => {
-              console.log(e)
-              navigate(-1);
-            }}>
+            <StyledButtonModule
+              onClick={(e) => {
+                console.log(e);
+                navigate(-1);
+              }}>
               {t('Cancel')}
             </StyledButtonModule>
           </Grid>
@@ -105,7 +106,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="created"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -125,7 +126,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="validUntil"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -143,13 +144,13 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
               )}
             />
           </Grid>
-          <Grid item xs={12}/>
+          <Grid item xs={12} />
           <Grid item xs={6}>
             <h2>Recipient</h2>
             <Controller
               name="recipient.companyName"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -169,7 +170,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.city"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -189,7 +190,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.street"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -210,7 +211,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.postcode"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -231,7 +232,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.nip"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -251,7 +252,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.tel"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -270,7 +271,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.email"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -289,7 +290,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="recipient.bankAccount"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -313,7 +314,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.companyName"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -333,7 +334,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.city"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -353,7 +354,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.street"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -373,7 +374,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.postcode"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -393,7 +394,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.nip"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -413,7 +414,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.tel"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -432,7 +433,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.email"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -451,7 +452,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
             <Controller
               name="sender.bankAccount"
               control={control}
-              render={({field}) => (
+              render={({ field }) => (
                 <TextField
                   className="input-filed"
                   {...field}
@@ -472,12 +473,12 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
         </Grid>
         {fields?.map((field, index) => {
           return (
-            <Grid container spacing={2} columns={{xs: 6}} key={field.id}>
+            <Grid container spacing={2} columns={{ xs: 6 }} key={field.id}>
               <Grid item xs={1}>
                 <Controller
                   name={`items.${index}.name`}
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TextField
                       className="input-filed"
                       {...field}
@@ -498,7 +499,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
                 <Controller
                   name={`items.${index}.amount`}
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TextField
                       className="input-filed"
                       {...field}
@@ -519,7 +520,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
                 <Controller
                   name={`items.${index}.unit`}
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TextField
                       className="input-filed"
                       {...field}
@@ -535,7 +536,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
                 <Controller
                   name={`items.${index}.tax`}
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TextField
                       className="input-filed"
                       {...field}
@@ -551,7 +552,7 @@ export default function InvoiceForm({formData, onSave}: InvoiceFormProps) {
                 <Controller
                   name={`items.${index}.price`}
                   control={control}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <TextField
                       className="input-filed"
                       {...field}
