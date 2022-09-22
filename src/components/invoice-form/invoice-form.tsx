@@ -15,9 +15,9 @@ import {
   defaultValueItem,
   validationSchema
 } from 'components/invoice-form/invoice-form.const';
+import { StyledButton } from 'components/styled-button/styled-button';
 
 import './invoice-forrm.css';
-import { StyledButton } from 'components/styled-button/styled-button';
 
 export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
   const navigate = useNavigate();
@@ -145,7 +145,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
               )}
             />
           </Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12} />
           <Grid item xs={6}>
             <h2>Recipient</h2>
             <Controller

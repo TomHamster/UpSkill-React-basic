@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledButton = styled.button<{primary?: boolean}>`
+export const StyledButton = styled.button<{ primary?: boolean }>`
   display: inline-block;
   border-radius: 5px;
   padding: 0.5rem 0;
@@ -11,9 +11,11 @@ export const StyledButton = styled.button<{primary?: boolean}>`
   border: 2px solid white;
   cursor: pointer;
 
-  ${props => props.primary && css`
-    border: 2px solid black;
-    background: white;
-    color: black;
-  `}
-`
+  ${(props) =>
+    props.primary &&
+    css`
+      border: 2px solid black;
+      background: white;
+      color: black;
+    `}
+`;
