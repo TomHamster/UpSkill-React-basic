@@ -1,14 +1,10 @@
-import i18n from '@/i18n/i18nForTests';
-import { render } from '@/test-utils';
-import { RenderResult, act, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import { render } from 'test-utils';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import React from 'react';
 
 import InvoicesPage from './invoices-page';
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => jest.fn()
-}));
+const mockedRouter = jest.mock('react-router-dom');
 
 const dummyTodos = [
   {
@@ -27,15 +23,10 @@ const dummyTodos = [
   }
 ];
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-mockedAxios.get.mockResolvedValueOnce({
-  data: dummyTodos,
-  status: 200,
-  statusText: 'Ok',
-  headers: {},
-  config: {}
-});
+jest.mock('hooks/useFetch', () => ({
+    useFetch: ()=> ({ data: dummyTodos, loading: false, error:'' })
+  })
+);
 
 describe('InvoicesPage', () => {
   test('should show table', async () => {
@@ -43,17 +34,16 @@ describe('InvoicesPage', () => {
 
     const tableElement = await screen.findByText('Actions');
 
-    // const tableElement = await screen.findByText('Actions');
-    expect(await screen.findByText('Actions')).toBeVisible();
+    expect(tableElement).toBeVisible();
   });
 
-  // test('should get data from ', async () => {
-  //   render(<InvoicesPage />);
-  //
-  //   const moctext = await screen.findByText('ajert');
-  //
-  //   expect(moctext).toBeInTheDocument();
-  //
-  //   // expect(mockedAxios.get).toBeCalledTimes(1);
-  // });
+
+  test('click on the navigation should redirect', async () => {
+    render(<InvoicesPage />);
+
+    const button = await screen.getAllByText('Add new invoice')[0];
+    fireEvent.click(button)
+    expect(screen.getByText(/Invoice Form/i)).toBeInTheDocument();
+
+  });
 });
