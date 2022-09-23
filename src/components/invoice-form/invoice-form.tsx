@@ -71,7 +71,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
 
   return (
     <>
-      <h2>Form Demo</h2>
+      <h2>Invoice Form</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
