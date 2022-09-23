@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { render } from '@testing-library/react';
-
-import InvoiceForm from 'components/invoice-form/invoice-form';
 import { BrowserRouter } from 'react-router-dom';
 
+import InvoiceForm from 'components/invoice-form/invoice-form';
+
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({t: jest.fn((str) => str)})
+  useTranslation: () => ({ t: jest.fn((str) => str) })
 }));
 
 const mockSaveCallback = jest.fn();
@@ -51,26 +51,33 @@ const mockValidData = {
   }
 };
 describe('InvoiceForm', () => {
-
   test('on save should be called', async () => {
-    render(<BrowserRouter><InvoiceForm onSave={mockSaveCallback} formData={mockValidData}/></BrowserRouter>);
+    render(
+      <BrowserRouter>
+        <InvoiceForm onSave={mockSaveCallback} formData={mockValidData} />
+      </BrowserRouter>
+    );
 
-    const button = screen.getByRole('button', {name: /Save/i})
-    fireEvent.click(button)
+    const button = screen.getByRole('button', { name: /Save/i });
+    fireEvent.click(button);
     await waitFor(() => {
-      expect(mockSaveCallback).toBeCalled()
-    })
+      expect(mockSaveCallback).toBeCalled();
+    });
   });
 
   test('on save should be not called', async () => {
-    mockValidData.no = ''
+    mockValidData.no = '';
 
-    render(<BrowserRouter><InvoiceForm onSave={mockSaveCallback} formData={mockValidData}/></BrowserRouter>);
-    const button = screen.getByRole('button', {name: /Save/i})
-    fireEvent.click(button)
+    render(
+      <BrowserRouter>
+        <InvoiceForm onSave={mockSaveCallback} formData={mockValidData} />
+      </BrowserRouter>
+    );
+    const button = screen.getByRole('button', { name: /Save/i });
+    fireEvent.click(button);
     await waitFor(() => {
-      const errorText =  screen.getByText(/no is a required field/i)
-      expect(errorText).toBeInTheDocument()
-    })
+      const errorText = screen.getByText(/no is a required field/i);
+      expect(errorText).toBeInTheDocument();
+    });
   });
 });
