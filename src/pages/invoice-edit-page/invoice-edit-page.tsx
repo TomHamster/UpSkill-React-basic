@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useFetch } from 'hooks/useFetch';
 import { INVOICES_ENDPOINTS } from 'pages/invoices-page/invoices-page.const';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PageTemplate from 'templates/page-template';
 
@@ -8,21 +9,15 @@ import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces'
 import InvoiceForm from 'components/invoice-form/invoice-form';
 
 export default function InvoiceEditPage() {
-  const [invoice, setInvoice] = useState<InvoiceFormData>();
-
-  const { id } = useParams();
+  const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { data, loading, error } = useFetch(INVOICES_ENDPOINTS.GER_INVOICE(id));
+  const invoice = data;
 
-  const getInvoice = (id: string) => {
-    return axios
-      .get(INVOICES_ENDPOINTS.GER_INVOICE(id))
-      .then((response: AxiosResponse<InvoiceFormData>) => {
-        setInvoice(response.data);
-      })
-      .catch((error: AxiosError) => {
-        redirect();
-      });
-  };
+  if (error || !id) {
+    navigate('page-not-found');
+  }
 
   const updateInvoice = (data: InvoiceFormData) => {
     if (!data.id) {
@@ -35,7 +30,7 @@ export default function InvoiceEditPage() {
         navigate(-1);
       })
       .catch((error: AxiosError) => {
-        alert('Something went wrong, try again');
+        setErrorMessage(error.message);
       });
   };
 
@@ -43,21 +38,8 @@ export default function InvoiceEditPage() {
     updateInvoice(data);
   };
 
-  const redirect = () => {
-    navigate('page-not-found');
-  };
-
-  useEffect(() => {
-    if (!id) {
-      redirect();
-      return;
-    }
-
-    getInvoice(id).then();
-  }, []);
-
   return (
-    <PageTemplate>
+    <PageTemplate loading={loading} error={errorMessage}>
       {invoice && <InvoiceForm formData={invoice} onSave={save}></InvoiceForm>}
     </PageTemplate>
   );
