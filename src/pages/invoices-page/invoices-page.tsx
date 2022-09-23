@@ -80,12 +80,14 @@ export default function InvoicesPage() {
 
   return (
     <PageTemplate loading={loading} error={error}>
-      {invoicesList && <StickyTable
-        columns={columns}
-        rows={invoicesList}
-        actions={actions}
-        tableMaxHeight={`calc(100vh - (${PageNavHeight} + 150px))`}
-      /> }
+      {invoicesList && (
+        <StickyTable
+          columns={columns}
+          rows={invoicesList}
+          actions={actions}
+          tableMaxHeight={`calc(100vh - (${PageNavHeight} + 150px))`}
+        />
+      )}
     </PageTemplate>
   );
 }
