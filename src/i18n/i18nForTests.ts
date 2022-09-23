@@ -10,7 +10,7 @@ i18n
     fallbackLng: 'en',
     ns: ['locales'],
     defaultNS: 'locales',
-    debug: true
+    debug: false
   });
 
 export default i18n;

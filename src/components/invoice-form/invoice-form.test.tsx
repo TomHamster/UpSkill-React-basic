@@ -1,8 +1,12 @@
-import { screen } from '@testing-library/react';
-import InvoiceNewPage from 'pages/invoice-new-page';
-import { render } from 'test-utils';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import InvoiceForm from 'components/invoice-form/invoice-form';
+import { BrowserRouter } from 'react-router-dom';
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({t: jest.fn((str) => str)})
+}));
 
 const mockSaveCallback = jest.fn();
 const mockValidData = {
@@ -47,15 +51,26 @@ const mockValidData = {
   }
 };
 describe('InvoiceForm', () => {
+
   test('on save should be called', async () => {
-    render(<InvoiceForm onSave={mockSaveCallback} formData={mockValidData} />);
-    const form = screen.getByText(/Invoice Form/i);
-    expect(form).toBeInTheDocument();
+    render(<BrowserRouter><InvoiceForm onSave={mockSaveCallback} formData={mockValidData}/></BrowserRouter>);
+
+    const button = screen.getByRole('button', {name: /Save/i})
+    fireEvent.click(button)
+    await waitFor(() => {
+      expect(mockSaveCallback).toBeCalled()
+    })
   });
 
   test('on save should be not called', async () => {
-    render(<InvoiceForm onSave={mockSaveCallback} formData={mockValidData} />);
+    mockValidData.no = ''
 
-    expect(mockSaveCallback).not.toBeCalled();
+    render(<BrowserRouter><InvoiceForm onSave={mockSaveCallback} formData={mockValidData}/></BrowserRouter>);
+    const button = screen.getByRole('button', {name: /Save/i})
+    fireEvent.click(button)
+    await waitFor(() => {
+      const errorText =  screen.getByText(/no is a required field/i)
+      expect(errorText).toBeInTheDocument()
+    })
   });
 });

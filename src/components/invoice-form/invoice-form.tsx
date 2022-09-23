@@ -21,7 +21,6 @@ import { StyledButtonModule } from 'components/styled-button/styled-button-modul
 import './invoice-forrm.css';
 
 export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
-  console.log('asdasdasds', formData);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const formOptions = {
@@ -39,7 +38,6 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
 
   const onSubmit = (data: InvoiceFormData) => {
     data.amount = calculateAmount();
-    console.log(data);
     onSave(data);
   };
 
