@@ -38,7 +38,7 @@ function createRandomInvoices() {
         city: faker.address.city(),
         postcode: faker.address.zipCode(),
         nip: faker.datatype.number(),
-        tel: faker.phone.number(),
+        tel: faker.phone.number('#########'),
         email: '',
         bankAccount: faker.finance.account(),
         street: faker.address.street()
@@ -48,7 +48,7 @@ function createRandomInvoices() {
         city: faker.address.city(),
         postcode: faker.address.zipCode(),
         nip: faker.datatype.number(),
-        tel: faker.phone.number(),
+        tel: faker.phone.number('#########'),
         email: '',
         bankAccount: faker.finance.account(),
         street: faker.address.street()

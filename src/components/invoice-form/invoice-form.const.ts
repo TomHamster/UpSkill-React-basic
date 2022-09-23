@@ -1,6 +1,7 @@
-import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
 import { t } from 'i18next';
 import * as Yup from 'yup';
+
+import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
 
 export const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;

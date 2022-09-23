@@ -1,6 +1,7 @@
-import NavBar from '@/components/navbar';
 import { Box } from '@mui/material';
 import React from 'react';
+
+import NavBar from 'components/navbar';
 
 import { PageTemplateProps } from './page-template.interface';
 import { PageContainer } from './page-template.style';

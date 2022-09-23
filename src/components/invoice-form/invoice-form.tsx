@@ -1,19 +1,20 @@
-import {
-  InvoiceFormData,
-  InvoiceFormProps,
-  InvoiceItem
-} from '@/components/invoice-form/invoce-form.interfaces';
-import {
-  defaultValueForm,
-  defaultValueItem,
-  validationSchema
-} from '@/components/invoice-form/invoice-form.const';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Grid, TextField } from '@mui/material';
 import { useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  InvoiceFormData,
+  InvoiceFormProps,
+  InvoiceItem
+} from 'components/invoice-form/invoce-form.interfaces';
+import {
+  defaultValueForm,
+  defaultValueItem,
+  validationSchema
+} from 'components/invoice-form/invoice-form.const';
 
 import './invoice-forrm.css';
 

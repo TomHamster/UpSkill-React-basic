@@ -1,7 +1,7 @@
-import InvoiceEditPage from '@/pages/invoice-edit-page';
-import InvoiceNewPage from '@/pages/invoice-new-page';
-import InvoicesPage from '@/pages/invoices-page';
-import NotFoundPage from '@/pages/not-found-page';
+import InvoiceEditPage from 'pages/invoice-edit-page';
+import InvoiceNewPage from 'pages/invoice-new-page';
+import InvoicesPage from 'pages/invoices-page';
+import NotFoundPage from 'pages/not-found-page';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 export default function Router() {

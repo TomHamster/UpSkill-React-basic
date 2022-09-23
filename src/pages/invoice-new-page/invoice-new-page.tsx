@@ -1,9 +1,10 @@
-import { InvoiceFormData } from '@/components/invoice-form/invoce-form.interfaces';
-import InvoiceForm from '@/components/invoice-form/invoice-form';
-import { INVOICES_ENDPOINTS } from '@/pages/invoices-page/invoices-page.const';
-import PageTemplate from '@/templates/page-template';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { INVOICES_ENDPOINTS } from 'pages/invoices-page/invoices-page.const';
 import { useNavigate } from 'react-router-dom';
+import PageTemplate from 'templates/page-template';
+
+import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
+import InvoiceForm from 'components/invoice-form/invoice-form';
 
 export default function InvoiceNewPage() {
   const navigate = useNavigate();
