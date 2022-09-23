@@ -1,25 +1,28 @@
-import {
-  InvoiceFormData,
-  InvoiceFormProps,
-  InvoiceItem
-} from '@/components/invoice-form/invoce-form.interfaces';
-import {
-  defaultValueForm,
-  defaultValueItem,
-  validationSchema
-} from '@/components/invoice-form/invoice-form.const';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Grid, TextField } from '@mui/material';
 import { useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  InvoiceFormData,
+  InvoiceFormProps,
+  InvoiceItem
+} from 'components/invoice-form/invoce-form.interfaces';
+import {
+  defaultValueForm,
+  defaultValueItem,
+  validationSchema
+} from 'components/invoice-form/invoice-form.const';
 
 import './invoice-forrm.css';
 
 export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const formOptions = {
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema()),
     defaultValues: { ...defaultValueForm, ...formData }
   };
 
@@ -87,7 +90,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
           </Grid>
           <Grid item xs={6}>
             <Button type="submit" variant="contained">
-              Save
+              {t('Save')}
             </Button>
             <Button
               className="button-cancel"
@@ -95,7 +98,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
               onClick={() => {
                 navigate(-1);
               }}>
-              Cancel
+              {t('Cancel')}
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -140,7 +143,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
               )}
             />
           </Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12} />
           <Grid item xs={6}>
             <h2>Recipient</h2>
             <Controller

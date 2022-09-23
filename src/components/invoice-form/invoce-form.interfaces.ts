@@ -1,4 +1,4 @@
-import { Invoice } from '@/pages/invoices-page/invoices-page.interface';
+import { Invoice } from 'pages/invoices-page/invoices-page.interface';
 
 export interface CompanyData {
   companyName: string;
