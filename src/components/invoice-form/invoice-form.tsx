@@ -15,6 +15,8 @@ import {
   defaultValueItem,
   validationSchema
 } from 'components/invoice-form/invoice-form.const';
+import { StyledButton } from 'components/styled-button/styled-button';
+import { StyledButtonModule } from 'components/styled-button/styled-button-module';
 
 import './invoice-forrm.css';
 
@@ -69,7 +71,7 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
 
   return (
     <>
-      <h2>Form Demo</h2>
+      <h2>Invoice Form</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -89,17 +91,15 @@ export default function InvoiceForm({ formData, onSave }: InvoiceFormProps) {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button type="submit" variant="contained">
+            <StyledButton primary type="submit">
               {t('Save')}
-            </Button>
-            <Button
-              className="button-cancel"
-              variant="contained"
-              onClick={() => {
-                navigate(-1);
+            </StyledButton>
+            <StyledButtonModule
+              onClick={(e) => {
+                navigate('/');
               }}>
               {t('Cancel')}
-            </Button>
+            </StyledButtonModule>
           </Grid>
           <Grid item xs={3}>
             <Controller
