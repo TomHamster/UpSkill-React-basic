@@ -5,6 +5,7 @@ import PageTemplate from 'templates/page-template';
 
 import { InvoiceFormData } from 'components/invoice-form/invoce-form.interfaces';
 import InvoiceForm from 'components/invoice-form/invoice-form';
+import { useState } from 'react';
 
 export default function InvoiceNewPage() {
   const [error, setError] = useState<string>();

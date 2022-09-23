@@ -12,7 +12,7 @@ export default function InvoiceEditPage() {
   const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, loading, error } = useFetch(INVOICES_ENDPOINTS.GER_INVOICE(id));
+  const { data, loading, error } = useFetch<InvoiceFormData>(INVOICES_ENDPOINTS.GER_INVOICE(id));
   const invoice = data;
 
   if (error || !id) {
