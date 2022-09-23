@@ -4,5 +4,5 @@ export interface PageTemplateProps {
   children: ReactNode;
   loading?: boolean;
   error?: string;
-  errorCallback?: ()=> void;
+  errorCallback?: () => void;
 }
