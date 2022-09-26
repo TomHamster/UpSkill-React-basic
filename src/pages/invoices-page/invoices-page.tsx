@@ -43,9 +43,9 @@ const columns: StickyTableColumnProps[] = [
 export default function InvoicesPage() {
   const [deleteID, setDeleteID] = useState('');
   const navigate = useNavigate();
-  const { data, loading, error } = useFetch(INVOICES_ENDPOINTS.ALL(), deleteID);
+  const { data, loading, error } = useFetch<Invoice[]>(INVOICES_ENDPOINTS.ALL(), deleteID);
 
-  const invoicesList: Invoice[] | null = useMemo<Invoice[] | null>(() => {
+  const invoicesList = useMemo<Invoice[] | undefined>(() => {
     return data;
   }, [data]);
 
@@ -80,12 +80,14 @@ export default function InvoicesPage() {
 
   return (
     <PageTemplate loading={loading} error={error}>
-      <StickyTable
-        columns={columns}
-        rows={invoicesList}
-        actions={actions}
-        tableMaxHeight={`calc(100vh - (${PageNavHeight} + 150px))`}
-      />
+      {invoicesList && (
+        <StickyTable
+          columns={columns}
+          rows={invoicesList}
+          actions={actions}
+          tableMaxHeight={`calc(100vh - (${PageNavHeight} + 150px))`}
+        />
+      )}
     </PageTemplate>
   );
 }

@@ -5,7 +5,7 @@ import NavBar from 'components/navbar';
 
 import { PageTemplateProps } from '../page-template/page-template.interface';
 
-class PageTemplateClass extends Component<PageTemplateProps> {
+class PageTemplateClass extends Component<PageTemplateProps, any> {
   state: any;
 
   constructor(props: PageTemplateProps) {

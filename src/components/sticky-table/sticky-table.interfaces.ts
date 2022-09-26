@@ -17,6 +17,6 @@ export interface StickyTableActionsProps extends IconButtonProps {
 export interface StickyTableProps {
   tableMaxHeight?: string;
   columns: StickyTableColumnProps[];
-  rows: any[] | null;
+  rows: any[];
   actions: StickyTableActionsProps[];
 }
